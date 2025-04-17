@@ -1,0 +1,22 @@
+# fly.toml file for your Node.js app
+
+app = "notmrbeastai"  # Replace this with the name of your app on Fly.io
+
+kill_signal = "SIGINT"  # Graceful shutdown signal
+kill_timeout = 5        # Timeout in seconds for graceful shutdown
+
+[build]
+  # Use Dockerfile if you have one
+  dockerfile = "./Dockerfile"
+
+[[services]]
+  internal_port = 3000  # The port your app listens on (make sure it's the same as your app's port)
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80  # Public HTTP port
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443  # Optional, for HTTPS
+    handlers = ["tls", "http"]
